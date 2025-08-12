@@ -1,0 +1,77 @@
+---
+title: "Compositional data exploration"
+author: "Sharon DeChenne"
+date: "2025-08-11"
+categories: [exploration]
+image: "Screenshot 2025-08-11 165826.png"
+---
+
+Exploring compositional data, quarto blog posts, and Positron all at the same time for my own learning.
+
+Aitchison, "The Statistical Analysis of Compositional Data"
+
+# Chapter 1
+
+Load some datasets from Aitchison, "The Statistical Analysis of Compositional Data"fr in the "compositions" package.
+
+```{r}
+library(compositions)
+library(tidyverse)
+
+#install.packages("isopleuros")
+
+library(isopleuros)
+```
+
+# Data 1
+Hongite and Kongite from chapter 1. 
+A, B, C, D, and E are albite, blandite, cornite, daubite, and endite. 
+
+```{r}
+#run if needed
+#data(package="compositions")
+
+# Data 1
+data("Hongite")
+head(Hongite)
+```
+
+
+# Data 2
+```{r}
+data("Kongite")
+head(Kongite)
+```
+
+# Data 3
+```{r}
+# depth is possible covariate
+data("Boxite")
+head(Boxite)
+```
+
+# Data 4
+```{r}
+data("Coxite")
+head(Coxite)
+```
+
+# Data 5
+```{r}
+# Rows 1-3 are the compositions, and row 4 is a covariate (water depth) which may account for some of the variation in the compositions
+data("ArcticLake")
+head(ArcticLake)
+```
+
+# Ternary diagram
+Re-creating Figure 1.2
+```{r}
+# Reorder columns to sand, silt, clay
+arctic_reordered <- ArcticLake[, c("silt", "clay", "sand")]
+
+# Plot with reordered vertices
+ternary_plot(arctic_reordered)
+ternary_grid()
+```
+
+

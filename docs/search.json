@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "QuartoBlogProject",
     "section": "",
-    "text": "Compositional data exploration\n\n\n\nexploration\n\n\n\n\n\n\n\n\n\nAug 11, 2025\n\n\nSharon DeChenne\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nAug 5, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nAug 2, 2025\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "Compositional data exploration\n\n\n\nearly exploration\n\n\n\n\n\n\n\n\n\nAug 11, 2025\n\n\nSharon DeChenne\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nAug 5, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nAug 2, 2025\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -32,6 +32,41 @@
     "href": "posts/08112025_compositional_data/index.html",
     "title": "Compositional data exploration",
     "section": "",
-    "text": "Exploring compositional data, quarto blog posts, and Positron all at the same time for my own learning.\nAitchison, “The Statistical Analysis of Compositional Data”\n\nChapter 1\nLoad some datasets from Aitchison, “The Statistical Analysis of Compositional Data”fr in the “compositions” package.\n\nlibrary(compositions)\n\nWarning: package 'compositions' was built under R version 4.4.3\n\n\nWelcome to compositions, a package for compositional data analysis.\nFind an intro with \"? compositions\"\n\n\n\nAttaching package: 'compositions'\n\n\nThe following objects are masked from 'package:stats':\n\n    anova, cor, cov, dist, var\n\n\nThe following object is masked from 'package:graphics':\n\n    segments\n\n\nThe following objects are masked from 'package:base':\n\n    %*%, norm, scale, scale.default\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n#install.packages(\"isopleuros\")\n\nlibrary(isopleuros)\n\nWarning: package 'isopleuros' was built under R version 4.4.3\n\n\n\n\nData 1\nHongite and Kongite from chapter 1. A, B, C, D, and E are albite, blandite, cornite, daubite, and endite.\n\n#run if needed\n#data(package=\"compositions\")\n\n# Data 1\ndata(\"Hongite\")\nhead(Hongite)\n\n     A         B    C    D    E\n1 48.8 31.700000  3.8  6.4  9.3\n2 48.2 23.800000  9.0  9.2  9.8\n3 37.0  9.100001 34.2  9.5 10.2\n4 50.9 23.800000  7.2 10.1  8.0\n5 44.2 38.300000  2.9  7.7  6.9\n6 52.3 26.200000  4.2 12.5  4.8\n\n\n\n\nData 2\n\ndata(\"Kongite\")\nhead(Kongite)\n\n     A    B    C    D    E\n1 33.5  6.1 41.3  7.1 12.0\n2 47.6 14.9 16.1 14.8  6.6\n3 52.7 23.9  6.0  8.7  8.7\n4 44.5 24.2 10.7 11.9  8.7\n5 42.3 47.6  0.6  4.1  5.4\n6 51.8 33.2  1.9  7.0  6.1\n\n\n\n\nData 3\n\n# depth is possible covariate\ndata(\"Boxite\")\nhead(Boxite)\n\n     A    B    C    D   E depth\n1 43.5 25.1 14.7 10.0 6.7     1\n2 41.1 27.5 13.9  9.5 8.0     2\n3 41.5 20.1 20.6 11.1 6.7     3\n4 33.9 37.8 11.1 11.5 5.7     4\n5 46.5 16.0 15.6 14.3 7.6     5\n6 45.3 19.4 14.8 13.5 9.3     6\n\n\n\n\nData 4\n\ndata(\"Coxite\")\nhead(Coxite)\n\n     A    B   C    D        E depth porosity\n1 44.2 31.9 5.4 10.5 8.000000     1     21.8\n2 49.0 25.4 5.8 11.3 8.500000     2     25.2\n3 50.2 24.8 5.7 11.1 8.200000     3     26.1\n4 49.9 24.7 5.4 11.4 8.600001     4     26.3\n5 48.5 27.8 5.9 10.2 7.600000     5     22.6\n6 45.9 27.1 6.9 11.5 8.600001     6     21.4\n\n\n\n\nData 5\n\n# Rows 1-3 are the compositions, and row 4 is a covariate (water depth) which may account for some of the variation in the compositions\ndata(\"ArcticLake\")\nhead(ArcticLake)\n\n  sand silt clay depth\n1 77.5 19.5  3.0  10.4\n2 71.9 24.9  3.2  11.7\n3 50.7 36.1 13.2  12.8\n4 52.2 40.9  6.6  13.0\n5 70.0 26.5  3.5  15.7\n6 66.5 32.2  1.3  16.3\n\n\n\n\nTernary diagram\nRe-creating Figure 1.2\n\n# Reorder columns to sand, silt, clay\narctic_reordered &lt;- ArcticLake[, c(\"silt\", \"clay\", \"sand\")]\n\n# Plot with reordered vertices\nternary_plot(arctic_reordered)\nternary_grid()"
+    "text": "Exploring compositional data, quarto blog posts, and Positron all at the same time for my own learning.\nAitchison, “The Statistical Analysis of Compositional Data”"
+  },
+  {
+    "objectID": "posts/08112025_compositional_data/index.html#data-1",
+    "href": "posts/08112025_compositional_data/index.html#data-1",
+    "title": "Compositional data exploration",
+    "section": "Data 1",
+    "text": "Data 1\nHongite and Kongite from chapter 1. A, B, C, D, and E are albite, blandite, cornite, daubite, and endite.\n\n# Data 1\ndata(\"Hongite\")\nhead(Hongite)\n\n     A         B    C    D    E\n1 48.8 31.700000  3.8  6.4  9.3\n2 48.2 23.800000  9.0  9.2  9.8\n3 37.0  9.100001 34.2  9.5 10.2\n4 50.9 23.800000  7.2 10.1  8.0\n5 44.2 38.300000  2.9  7.7  6.9\n6 52.3 26.200000  4.2 12.5  4.8"
+  },
+  {
+    "objectID": "posts/08112025_compositional_data/index.html#data-2",
+    "href": "posts/08112025_compositional_data/index.html#data-2",
+    "title": "Compositional data exploration",
+    "section": "Data 2",
+    "text": "Data 2\n\ndata(\"Kongite\")\nhead(Kongite)\n\n     A    B    C    D    E\n1 33.5  6.1 41.3  7.1 12.0\n2 47.6 14.9 16.1 14.8  6.6\n3 52.7 23.9  6.0  8.7  8.7\n4 44.5 24.2 10.7 11.9  8.7\n5 42.3 47.6  0.6  4.1  5.4\n6 51.8 33.2  1.9  7.0  6.1"
+  },
+  {
+    "objectID": "posts/08112025_compositional_data/index.html#data-3",
+    "href": "posts/08112025_compositional_data/index.html#data-3",
+    "title": "Compositional data exploration",
+    "section": "Data 3",
+    "text": "Data 3\n\n# depth is possible covariate\ndata(\"Boxite\")\nhead(Boxite)\n\n     A    B    C    D   E depth\n1 43.5 25.1 14.7 10.0 6.7     1\n2 41.1 27.5 13.9  9.5 8.0     2\n3 41.5 20.1 20.6 11.1 6.7     3\n4 33.9 37.8 11.1 11.5 5.7     4\n5 46.5 16.0 15.6 14.3 7.6     5\n6 45.3 19.4 14.8 13.5 9.3     6"
+  },
+  {
+    "objectID": "posts/08112025_compositional_data/index.html#data-4",
+    "href": "posts/08112025_compositional_data/index.html#data-4",
+    "title": "Compositional data exploration",
+    "section": "Data 4",
+    "text": "Data 4\n\ndata(\"Coxite\")\nhead(Coxite)\n\n     A    B   C    D        E depth porosity\n1 44.2 31.9 5.4 10.5 8.000000     1     21.8\n2 49.0 25.4 5.8 11.3 8.500000     2     25.2\n3 50.2 24.8 5.7 11.1 8.200000     3     26.1\n4 49.9 24.7 5.4 11.4 8.600001     4     26.3\n5 48.5 27.8 5.9 10.2 7.600000     5     22.6\n6 45.9 27.1 6.9 11.5 8.600001     6     21.4"
+  },
+  {
+    "objectID": "posts/08112025_compositional_data/index.html#data-5",
+    "href": "posts/08112025_compositional_data/index.html#data-5",
+    "title": "Compositional data exploration",
+    "section": "Data 5",
+    "text": "Data 5\nRows 1-3 are the compositions, and row 4 is a covariate (water depth) which may account for some of the variation in the compositions\n\ndata(\"ArcticLake\")\nhead(ArcticLake)\n\n  sand silt clay depth\n1 77.5 19.5  3.0  10.4\n2 71.9 24.9  3.2  11.7\n3 50.7 36.1 13.2  12.8\n4 52.2 40.9  6.6  13.0\n5 70.0 26.5  3.5  15.7\n6 66.5 32.2  1.3  16.3"
   }
 ]
